@@ -21,7 +21,7 @@ public class NettyClient {
     private static NettyClient instance;
     private SocketChannel channel;
     private static final String ip = "localhost";
-    private static final int port = 8080;
+    private static final int port = 8000;
     public static final String DELIMITER = "$_";
 
     public NettyClient() {
@@ -38,8 +38,8 @@ public class NettyClient {
         }
     }
 
-    public void sendMessage(String message) {
-        message = message + DELIMITER;
+    public void sendMessage(String name, String message) {
+        message = name + ":" + message + DELIMITER;
         if (channel != null && channel.isActive()) {
             channel.writeAndFlush(Unpooled.copiedBuffer(message.getBytes()));
         }

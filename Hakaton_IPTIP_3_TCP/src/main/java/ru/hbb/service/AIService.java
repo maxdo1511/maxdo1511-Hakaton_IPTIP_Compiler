@@ -70,7 +70,7 @@ public class AIService {
                 if (process.isAlive()) {
                     process.destroy();
                     userConnect(user);
-                    NettyClient.getInstance().sendMessage("Error! So long request!");
+                    NettyClient.getInstance().sendMessage(user, "finalized");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -83,8 +83,10 @@ public class AIService {
         Scanner scanner = new Scanner(stdout);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            NettyClient.getInstance().sendMessage(line);
+            NettyClient.getInstance().sendMessage(user, line);
         }
+
+        NettyClient.getInstance().sendMessage(user, "finalized");
     }
 
 //    public String checkCode(String request) throws InterruptedException, IOException {
